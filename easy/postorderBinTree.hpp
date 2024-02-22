@@ -2,7 +2,7 @@
 #include <stack>
 #include "../binTree.hpp"
 
-std::vector<int> preorderTraversal(TreeNode* root) {
+std::vector<int> postorderTraversal(TreeNode* root) {
     std::vector<int> out;
     std::stack<TreeNode*> stack;
     stack.push(root);
@@ -16,15 +16,15 @@ std::vector<int> preorderTraversal(TreeNode* root) {
     return out;
 }
 
-static void preorder(TreeNode* root, std::vector<int>& vec) {
+static void postorder(TreeNode* root, std::vector<int>& vec) {
     if (root == nullptr) return;
+    postorder(root->left, vec);
+    postorder(root->right, vec);
     vec.push_back(root->val);
-    preorder(root->left, vec);
-    preorder(root->right, vec);
 }
 
-//std::vector<int> preorderTraversal(TreeNode* root) {
+//std::vector<int> postorderTraversal(TreeNode* root) {
 //    std::vector<int> out;
-//    preorder(root, out);
+//    postorder(root, out);
 //    return out;
 //}

@@ -3,27 +3,31 @@
 #include "../binTree.hpp"
 
 std::vector<int> inorderTraversal(TreeNode* root) {
-    TreeNode* stack_node = root;
+    std::vector<int> out;
     std::stack<TreeNode*> stack;
-    stack.push(root);
+    TreeNode* curr = root;
     while(!stack.empty()) {
-        auto pop = stack.top();
+        while (curr != nullptr) {
+            stack.push(curr);
+            curr = curr->left;
+        }
+        curr = stack.top();
         stack.pop();
-        stack.push(pop->left);
-        stack.push(pop->right);
+        out.push_back(curr->val);
+        curr = curr->right;
     }
+    return out;
 }
 
 static void inorder(TreeNode* root, std::vector<int>& vec) {
-    if(root) {
-        inorder(root->left, vec);
-        vec.push_back(root->val);
-        inorder(root->right, vec);
-    }
+    if (root == nullptr) return;
+    inorder(root->left, vec);
+    vec.push_back(root->val);
+    inorder(root->right, vec);
 }
 
-std::vector<int> inorderTraversal(TreeNode* root) {
-    std::vector<int> out;
-    inorder(root, out);
-    return out;
-}
+//std::vector<int> inorderTraversal(TreeNode* root) {
+//    std::vector<int> out;
+//    inorder(root, out);
+//    return out;
+//}
