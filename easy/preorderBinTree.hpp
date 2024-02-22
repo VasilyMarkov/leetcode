@@ -9,14 +9,20 @@ std::vector<int> preorderTraversal(TreeNode* root) {
     while(!stack.empty()) {
         auto curr = stack.top();
         stack.pop();
-        out.push_back(curr->val);
-        stack.push(curr->right);
-        stack.push(curr->left);
+        if(curr != nullptr) {
+            out.push_back(curr->val);
+            if(curr->right != nullptr) {
+                stack.push(curr->right);
+            }
+            if(curr->left != nullptr) {
+                stack.push(curr->left);
+            }
+        }
     }
     return out;
 }
-
-static void preorder(TreeNode* root, std::vector<int>& vec) {
+ 
+void preorder(TreeNode* root, std::vector<int>& vec) {
     if (root == nullptr) return;
     vec.push_back(root->val);
     preorder(root->left, vec);

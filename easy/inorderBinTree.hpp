@@ -6,7 +6,7 @@ std::vector<int> inorderTraversal(TreeNode* root) {
     std::vector<int> out;
     std::stack<TreeNode*> stack;
     TreeNode* curr = root;
-    while(!stack.empty()) {
+    while(curr != nullptr || !stack.empty()) {
         while (curr != nullptr) {
             stack.push(curr);
             curr = curr->left;
